@@ -1,0 +1,25 @@
+<div class='movie-detail'>
+    <div class='movie-detail-header'>
+      {{pageTitle + ': ' + movie?.name}}
+    </div>
+  
+    <div class='movie-detail-content'
+         *ngIf='movie'>
+      <div class="movie-detail-content-left-box">
+        <div class="movie-detail-field">Name:</div>
+        <div class="movie-detail-field">Date watched:</div>
+        <div class="movie-detail-field">Date added to watched:</div>
+      </div>
+      <div class="movie-detail-content-right-box">
+        <div class="movie-detail-field">{{movie.name}}</div>
+        <div class="movie-detail-field">{{movie.dateWatched}}</div>
+        <div class="movie-detail-field">{{movie.dateWatched}}</div>
+      </div>
+    </div>
+    <div class='movie-detail-footer'>
+      <button class="back-button"
+              (click)='onBack()'>
+        Go back to search
+      </button>
+    </div>
+  </div>

@@ -1,0 +1,137 @@
+.content-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    margin: 10px 25% 0 25%;
+}
+
+.app-title {
+    font-size: 100px;
+    color: rgb(68, 24, 24);
+}
+
+.search-input{
+    width: 60%;
+    height: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    line-height: 1.4em;
+    font-weight: 300;
+    font-size: 24px; 
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: rgba(0, 0, 0, 0.003);
+    color: rgb(68, 24, 24);
+    border: 1px solid rgb(68, 24, 24);
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%), 0 25px 50px 0 rgb(0 0 0 / 15%);
+    outline: none; 
+
+    &::placeholder {
+        color: #d6d3d3;
+        font-style: italic;
+    }
+}
+
+.content-table {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.results-table-header {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 34% 33% 33%;
+    grid-template-rows: 45px;
+    border: 1px solid rgb(68, 24, 24);;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
+}
+
+.movie-name-header {
+    color: rgb(68, 24, 24);
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.movie-is-watched-header {
+    color: rgb(68, 24, 24);
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.movie-date-watched-header {
+    color: rgb(68, 24, 24);
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.results-table-values {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 34% 33% 33%;
+    grid-template-rows: 45px;
+    border: 1px solid rgb(68, 24, 24);;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
+}
+
+.movie-name {
+    color: rgb(68, 24, 24);
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.see-details-button {
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 25px;
+    color: rgb(68, 24, 24);
+    background-color: #e0cdcd;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 80%;
+}
+
+.add-to-watched-button {
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 25px;
+    color: rgb(68, 24, 24);
+    background-color: #e0cdcd;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 80%;
+
+    &.hide {
+        display: none;
+    }
+}
+
+.date-picker {
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 80%;
+    display: none;
+
+    &.show {
+        display: initial;
+    }
+}
+
+.movie-watched-date {
+    margin-top: 15px;
+    margin-right: 20px;
+    display: none;
+
+    &.show {
+        display: initial;
+    }
+}
