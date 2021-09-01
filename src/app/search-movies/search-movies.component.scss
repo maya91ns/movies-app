@@ -56,19 +56,10 @@
     margin-top: 15px;
 }
 
-.movie-is-watched-header {
-    color: rgb(68, 24, 24);
-    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    text-align: left;
-    margin-left: 10px;
-    margin-top: 15px;
-}
-
 .movie-date-watched-header {
     color: rgb(68, 24, 24);
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-align: left;
-    margin-left: 10px;
     margin-top: 15px;
 }
 
@@ -128,7 +119,7 @@
 
 .movie-watched-date {
     margin-top: 15px;
-    margin-right: 20px;
+    //margin-left: 27px;
     display: none;
 
     &.show {

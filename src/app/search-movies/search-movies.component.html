@@ -20,8 +20,8 @@
         [ngClass]="{'hide': movie.isWatched == true}">
           Add to watched
       </button>
-      <div class="date-picker" [ngClass]="{'show': movie.isWatched}">
-        <input type="date" value="2021-08-01" id="start" (onchange)="pickDate($event)"
+      <div class="date-picker" [ngClass]="{'show': movie.isWatched && !movie.dateWatched}">
+        <input type="date" value="2021-08-01" id="start" (change)="pickDate($event, movie.id)"
         min="2020-01-01" max="2021-08-31">
       </div>
       <div class="movie-watched-date"

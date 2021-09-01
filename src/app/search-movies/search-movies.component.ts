@@ -54,9 +54,9 @@ export class SearchMoviesComponent implements OnInit {
       {
         "id": i,
         "media_id": i,
-        "name": `Harry Potter ${i}`
+        "name": `The Lord of the rings ${i}`
       })
-      this.movies.push({id: i, name: `Harry Potter ${i}`, isWatched: false})
+      this.movies.push({id: i, name: `The Lord of the rings ${i}`, isWatched: false})
       this.movies.forEach(element => {
         if(element.isWatched)
         {
@@ -93,6 +93,7 @@ export class SearchMoviesComponent implements OnInit {
   }
 
   addToWatched(movieId: number) {
+    // update movies array too
     this.matchedMovies.forEach(element => {
       if(element.id == movieId)
       {
@@ -102,7 +103,13 @@ export class SearchMoviesComponent implements OnInit {
     //localStorage.setItem("movies", JSON.stringify(this.movies));
   }
 
-  pickDate(event: any) {
-    
+  pickDate(event: any, movieId: number) {
+    // update movies array too
+    this.matchedMovies.forEach(element => {
+      if(element.id == movieId)
+      {
+        element.dateWatched = event.target.value;
+      }
+    })
   }
 }
