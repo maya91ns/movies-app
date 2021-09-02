@@ -5,20 +5,15 @@
   
     <div class='movie-detail-content'
          *ngIf='movie'>
-      <div class="movie-detail-content-box-1">
+
+      <div class="movie-detail-field-box">
         <div class="movie-detail-field">Name:</div>
-        <div class="movie-detail-field">Date watched:</div>
-        <div class="movie-detail-field">Date added to watched:</div>
-        <div class="movie-detail-field">Original language:</div>
-        <div class="movie-detail-field">Popularity:</div>
-        <div class="movie-detail-field">Release date:</div>
-        <div class="movie-detail-field">Genres:</div>
-        <div class="movie-detail-field">Overview:</div>
+        <div class="movie-detail-data">{{movie.name}}</div>
       </div>
-      <div class="movie-detail-content-box-2">
-        <div class="movie-detail-field">{{movie.name}}</div>
+      <div class="movie-detail-field-box">
+        <div class="movie-detail-field">Date watched:</div>
         <div class="date-watched-box">
-          <div class="movie-detail-field">{{movie.dateWatched}}</div>
+          <div class="movie-detail-data" [ngClass]="{'hide': !movie.isWatched}">{{movie.dateWatched}}</div>
           <button class="edit-date-watched-button"  
             [ngClass]="{'hide': !showEditButton}"
             (click)='editDateWatched()'>
@@ -29,13 +24,33 @@
             min="2020-01-01" max="2021-08-31">
           </div>
         </div>
-        <div class="movie-detail-field">{{movie.dateAddedToWatched}}</div>
-        <div class="movie-detail-field">{{movie.originalLanguage}}</div>
-        <div class="movie-detail-field">{{movie.popularity}}</div>
-        <div class="movie-detail-field">{{movie.releaseDate}}</div>
-        <div class="movie-detail-field">{{movie.genres}}</div>
-        <div class="movie-detail-field">{{movie.overview}}</div>
       </div>
+      <div class="date-added-to-watched-box" [ngClass]="{'hide': !movie.isWatched}">
+        <div class="movie-detail-field">Date added to watched:</div>
+        <div class="movie-detail-data">{{movie.dateAddedToWatched}}</div>
+      </div>
+      <div class="movie-detail-field-box">
+        <div class="movie-detail-field">Original language:</div>
+        <div class="movie-detail-data">{{movie.originalLanguage}}</div>
+      </div>
+      <div class="movie-detail-field-box">
+        <div class="movie-detail-field">Popularity:</div>
+        <div class="movie-detail-data">{{movie.popularity}}</div>
+      </div>
+      <div class="movie-detail-field-box">
+        <div class="movie-detail-field">Release date:</div>
+        <div class="movie-detail-data">{{movie.releaseDate}}</div>
+      </div>
+      <div class="movie-detail-field-box">
+        <div class="movie-detail-field">Genres:</div>
+        <div class="movie-detail-data">{{movie.genres}}</div>
+      </div>
+      <div class="movie-detail-field-box">
+        <div class="movie-detail-field">Overview:</div>
+        <div class="movie-overview">{{movie.overview}}</div>
+      </div>
+
+
     </div>
     <div class='movie-detail-footer'>
       <button class="back-button"

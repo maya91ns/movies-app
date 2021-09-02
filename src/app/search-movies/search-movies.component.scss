@@ -39,7 +39,8 @@
     color: rgb(68, 24, 24);
     background-color: #e0cdcd;
     border-radius: 25px;
-    width: 27%;
+    width: auto;
+    padding: 0 15px 0 15px;
 }
 
 .content-table {
@@ -52,7 +53,7 @@
 .results-table-header {
     display: grid;
     width: 100%;
-    grid-template-columns: 34% 33% 33%;
+    grid-template-columns: 50% 25% 25%;
     grid-template-rows: 45px;
     border: 1px solid rgb(68, 24, 24);;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
@@ -78,7 +79,7 @@
 .results-table-values {
     display: grid;
     width: 100%;
-    grid-template-columns: 34% 33% 33%;
+    grid-template-columns: 50% 25% 25%;
     grid-template-rows: 45px;
     border: 1px solid rgb(68, 24, 24);;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
@@ -99,8 +100,9 @@
     background-color: #e0cdcd;
     border-radius: 25px;
     margin-top: 10px;
-    margin-right: 20px;
-    width: 80%;
+    margin-left: 20px;
+    width: 70%;
+    padding: 0 15px 0 15px;
 }
 
 .add-to-watched-button {
@@ -110,8 +112,8 @@
     background-color: #e0cdcd;
     border-radius: 25px;
     margin-top: 10px;
-    margin-right: 20px;
-    width: 80%;
+    width: 85%;
+    padding: 0 15px 0 15px;
 
     &.hide {
         display: none;

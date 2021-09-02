@@ -26,6 +26,10 @@ export class MovieDetailComponent implements OnInit {
     if (id) {
       this.getMovie(id);
     }
+    if(localStorage.getItem(`watchedMovies:${localStorage.getItem("apiKey")}`) !== null) 
+    {
+      this.watchedMovies = JSON.parse(localStorage.getItem(`watchedMovies:${localStorage.getItem("apiKey")}`));
+    }
   }
 
   getMovie(movieId: number): void {
@@ -68,7 +72,6 @@ export class MovieDetailComponent implements OnInit {
     {
       this.movie.isWatched = true;
       this.showEditButton = false;
-      localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
     }
   }
 
@@ -78,25 +81,40 @@ export class MovieDetailComponent implements OnInit {
       this.movie.dateWatched = new Date(event.target.value).toDateString();
       this.movie.dateAddedToWatched = new Date(Date.now()).toDateString();
       this.showEditButton = true;
-      this.movie.hideDateWatchedValue = false;
-      localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
+      //this.movie.hideDateWatchedValue = false;
+
+      this.editDateWatchedInMovies();
     }
-    this.editDateWatchedInWatchedMovies();
+    
   }
 
-  editDateWatchedInWatchedMovies() {
-    if(localStorage.getItem(`watchedMovies:${localStorage.getItem("apiKey")}`) !== null) 
-    {
-      this.watchedMovies = JSON.parse(localStorage.getItem(`watchedMovies:${localStorage.getItem("apiKey")}`));
-    }
+  editDateWatchedInMovies() {
+    let isAlreadyWatched = false;
     this.watchedMovies.forEach(movie => {
-      if(movie.id = this.movie.id)
+      if(movie.id == this.movie.id)
       {
+        if(movie.isWatched)
+        {
+          isAlreadyWatched = true;
+        }
         movie.dateWatched = this.movie.dateWatched;
         movie.dateAddedToWatched = this.movie.dateAddedToWatched;
       }
     })
+    if(!isAlreadyWatched)
+    {
+      this.watchedMovies.push(this.movie);
+    }
     localStorage.setItem(`watchedMovies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.watchedMovies));
+    this.movies.forEach(movie => {
+      if(movie.id == this.movie.id)
+      {
+        movie.isWatched = true;
+        movie.dateWatched = this.movie.dateWatched;
+        movie.dateAddedToWatched = this.movie.dateAddedToWatched;
+      }
+    })
+    localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
   }
 
   onBack(): void {

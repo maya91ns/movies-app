@@ -17,42 +17,70 @@
 
 .movie-detail-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border: 1px solid rgb(68, 24, 24);;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%), 0 25px 50px 0 rgb(0 0 0 / 10%);
     width: 100.85%;
 }
 
-.movie-detail-content-box-1 {
-    margin-left: 10px;
-    margin-bottom: 20px;
-    width: 20%;
-}
-
-.movie-detail-content-box-2 {
-    width: 80%;
-    margin-bottom: 20px;
-}
-
-.date-watched-box {
+.movie-detail-field-box {
     display: flex;
     flex-direction: row;
+    width: 95%;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.date-added-to-watched-box {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    margin-left: 10px;
+    margin-bottom: 20px;
+
+    &.hide {
+        display: none;
+    }
 }
 
 .movie-detail-field {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: rgb(68, 24, 24);
-    margin-top: 20px;
+    width: 20%;
+}
+
+.movie-detail-data {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(68, 24, 24);
     margin-right: 30px;
+
+    &.hide {
+        display: none;
+    }
+}
+
+.movie-overview {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: rgb(68, 24, 24);
+    width: 80%;
+    text-align: justify;
+}
+
+.date-watched-box {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
 }
 
 .edit-date-watched-button {
-    margin-top: 17px;
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     height: 25px;
     color: rgb(68, 24, 24);
     background-color: #e0cdcd;
     border-radius: 25px;
+    width: auto;
+    padding: 0 15px 0 15px;
+    margin-top: -3px;
 
     &.hide {
         display: none;
@@ -60,8 +88,8 @@
 }
 
 .date-picker {
-    margin-top: 17px;
-    width: 80%;
+    width: 30%;
+    margin-top: -3px;
     
     &.hide {
         display: none;
@@ -83,5 +111,7 @@
     border-radius: 25px;
     margin-top: 12px;
     margin-left: 10px;
+    width: auto;
+    padding: 0 15px 0 15px;
 }
 

@@ -13,7 +13,7 @@
       </div>
       <div class="results-table-values" *ngFor="let movie of watchedMovies">
         <div class="movie-name">
-              {{movie.name}}  
+              {{movie.shortName}}  
         </div>
         <div class="movie-watched-date"
         [ngClass]="{'hide': movie.hideDateWatchedValue}">

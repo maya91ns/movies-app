@@ -17,21 +17,22 @@
     color: rgb(68, 24, 24);
     background-color: #e0cdcd;
     border-radius: 25px;
-    width: 18%;
+    width: auto;
+    padding: 0 15px 0 15px;
     margin-top: 20px;
 }
 
 .content-table {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 60%;
     margin-top: 30px;
 }
 
 .results-table-header {
     display: grid;
     width: 100%;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 35% 25% 20% 20%;
     grid-template-rows: 45px;
     border: 1px solid rgb(68, 24, 24);;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
@@ -57,7 +58,7 @@
 .results-table-values {
     display: grid;
     width: 100%;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 35% 25% 20% 20%;
     grid-template-rows: 45px;
     border: 1px solid rgb(68, 24, 24);;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
@@ -78,7 +79,9 @@
     background-color: #e0cdcd;
     border-radius: 25px;
     margin-top: 10px;
-    width: 80%;
+    margin-left: 0;
+    width: 86%;
+    padding: 0 15px 0 15px;
 }
 
 .remove-from-watched-button {
@@ -88,8 +91,9 @@
     background-color: #e0cdcd;
     border-radius: 25px;
     margin-top: 10px;
-    margin-right: 20px;
-    width: 80%;
+    margin-left: 10px;
+    width: 70%;
+    padding: 0 15px 0 15px;
 }
 
 .movie-watched-date {

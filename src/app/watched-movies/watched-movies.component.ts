@@ -19,24 +19,37 @@ export class WatchedMoviesComponent implements OnInit {
     {
       this.watchedMovies = JSON.parse(localStorage.getItem(`watchedMovies:${localStorage.getItem("apiKey")}`));
     }
+    if(localStorage.getItem(`movies:${localStorage.getItem("apiKey")}`) !== null) 
+    {
+      this.movies = JSON.parse(localStorage.getItem(`movies:${localStorage.getItem("apiKey")}`));
+    }
   }
 
   removeFromWatched(movieId: number) {
-    // this.movies.forEach(movie => {
-    //   if(movie.id == movieId)
-    //   {
-    //     movie.isWatched = false;
-    //     movie.hideDateWatchedValue = true;
-    //     movie.hideDatePicker = true;
-    //     this.watchedMovies.filter(function(ele){ 
-    //       return ele != movie; 
-    //   });
-    //   }
-    // })
+    this.movies.forEach(movie => {
+      if(movie.id == movieId)
+      {
+        movie.isWatched = false;
+        movie.hideDateWatchedValue = true;
+        movie.hideDatePicker = true;
+        this.removeMatching(movieId);    
+      }
+    })
+    localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
+    localStorage.setItem(`watchedMovies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.watchedMovies));
   }
 
-  removeFromArray() {
-
+  removeMatching(movieId: number) {
+    let index = 0;
+    let counter = 0;
+    this.watchedMovies.forEach(movie => {
+      if(movie.id == movieId)
+      {
+        index = counter;
+      }
+      counter++;
+    });
+    this.watchedMovies.splice(index, 1);
   }
 
   onBack(): void {

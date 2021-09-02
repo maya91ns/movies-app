@@ -3,7 +3,8 @@
     {{ title }}
   </span>
   <input class="search-input" 
-    type="text" 
+    type="text"
+    id="searchInputId" 
     placeholder = {{placeholderText}}
     (keyup.enter)="searchMovie($event)"/>
   <button class="see-watched-movies-button"
@@ -17,7 +18,7 @@
     </div>
     <div class="results-table-values" *ngFor="let movie of matchedMovies">
       <div class="movie-name">
-            {{movie.name}}  
+            {{movie.shortName}}  
       </div>
       <button class="add-to-watched-button"
         (click)="addToWatched(movie.id)"

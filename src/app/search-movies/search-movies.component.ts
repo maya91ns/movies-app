@@ -24,14 +24,27 @@ export class SearchMoviesComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem(`movies:${localStorage.getItem("apiKey")}`) !== null &&
-    localStorage.getItem(`movies:${localStorage.getItem("apiKey")}`) !== undefined)
+    if(localStorage.getItem(`movies:${localStorage.getItem("apiKey")}`) !== null)
     {
       this.movies = JSON.parse(localStorage.getItem(`movies:${localStorage.getItem("apiKey")}`) as string);
     }
     else
     {
       this.createSessionId();
+    }
+    if(localStorage.getItem(`searchString:${localStorage.getItem("apiKey")}`) !== null)
+    {
+      this.searchString = localStorage.getItem(`searchString:${localStorage.getItem("apiKey")}`);
+      (<HTMLInputElement>document.getElementById("searchInputId")).value = this.searchString;
+      this.movies.forEach(movie => {
+        if(movie.name?.toLowerCase().includes(this.searchString))
+        {      
+          this.matchedMovies.push({id: movie.id, name: movie.name, 
+            shortName: movie.name.length > 40 ? movie.name?.substring(0, 40) + "..." : movie.name, 
+            isWatched: movie.isWatched, dateWatched: movie.dateWatched, dateAddedToWatched: movie.dateAddedToWatched,
+            hideDateWatchedValue: movie.hideDateWatchedValue, hideDatePicker: movie.hideDatePicker});
+        }
+      });
     }
   }
 
@@ -81,8 +94,9 @@ export class SearchMoviesComponent implements OnInit {
     .subscribe(data => {
       this.results = data.results;
       this.results.forEach(movie => {
-        this.movies.push({id: movie.id, name: movie.title, isWatched: false, 
-        hideDateWatchedValue: true, hideDatePicker: true})
+        this.movies.push({id: movie.id, name: movie.title, 
+          shortName: movie.title.length > 40 ? movie.title?.substring(0, 40) + "..." : movie.title, 
+          isWatched: false, hideDateWatchedValue: true, hideDatePicker: true})
       })
       localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
     })
@@ -91,12 +105,13 @@ export class SearchMoviesComponent implements OnInit {
   searchMovie(event: any){
     this.matchedMovies = [];
     this.searchString = event.target.value.toLowerCase();
-    localStorage.setItem("searchString", this.searchString);
+    localStorage.setItem(`searchString:${localStorage.getItem("apiKey")}`, this.searchString);
     this.movies.forEach(movie => {
       if(movie.name?.toLowerCase().includes(this.searchString))
       {      
-        this.matchedMovies.push({id: movie.id, name: movie.name, isWatched: movie.isWatched, 
-          dateWatched: movie.dateWatched, dateAddedToWatched: movie.dateAddedToWatched,
+        this.matchedMovies.push({id: movie.id, name: movie.name, 
+          shortName: movie.name.length > 40 ? movie.name?.substring(0, 40) + "..." : movie.name, 
+          isWatched: movie.isWatched, dateWatched: movie.dateWatched, dateAddedToWatched: movie.dateAddedToWatched,
           hideDateWatchedValue: movie.hideDateWatchedValue, hideDatePicker: movie.hideDatePicker});
       }
     });
@@ -113,12 +128,12 @@ export class SearchMoviesComponent implements OnInit {
     this.movies.forEach(movie => {
       if(movie.id == movieId)
       {
-        this.watchedMovies.push(movie);
         movie.isWatched = true;
         movie.hideDatePicker = false;
       }
     })
-    localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
+    // u funkciji ispod upisujemo, pa ovde ne treba
+    //localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
   }
 
   pickDate(event: any, movieId: number) {
@@ -128,7 +143,6 @@ export class SearchMoviesComponent implements OnInit {
         movie.dateWatched = new Date(event.target.value).toDateString();
         movie.hideDateWatchedValue = false;
         movie.hideDatePicker = true;
-
       }
     })
     this.movies.forEach(movie => {
@@ -138,14 +152,10 @@ export class SearchMoviesComponent implements OnInit {
         movie.dateAddedToWatched = new Date(Date.now()).toDateString();
         movie.hideDateWatchedValue = false;
         movie.hideDatePicker = true;
+        this.watchedMovies.push(movie);
       }
     })
-    this.watchedMovies.forEach(movie => {
-      if(movie.id == movieId)
-      {
-        movie.dateWatched = new Date(event.target.value).toDateString();
-      }
-    })
+    // todomaja - zasto ovaj upis ne radi?
     localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
     localStorage.setItem(`watchedMovies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.watchedMovies));
   }
