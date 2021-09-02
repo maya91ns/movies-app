@@ -1,31 +1,35 @@
 <div class="content-box">
-  <span class="app-title">
+  <span class="title">
     {{ title }}
   </span>
   <input class="search-input" 
     type="text" 
     placeholder = {{placeholderText}}
     (keyup.enter)="searchMovie($event)"/>
+  <button class="see-watched-movies-button"
+    (click)="seeWatchedMovies()">
+      See watched movies
+  </button>
   <div class="content-table">
     <div class="results-table-header" *ngIf="matchedMovies.length">
       <div class="movie-name-header">Movie name</div>
       <div class="movie-date-watched-header">Date watched</div>
     </div>
-    <div class="results-table-values" *ngFor="let movie of matchedMovies; let i=index">
+    <div class="results-table-values" *ngFor="let movie of matchedMovies">
       <div class="movie-name">
             {{movie.name}}  
       </div>
       <button class="add-to-watched-button"
         (click)="addToWatched(movie.id)"
-        [ngClass]="{'hide': movie.isWatched == true}">
+        [ngClass]="{'hide': movie.isWatched}">
           Add to watched
       </button>
-      <div class="date-picker" [ngClass]="{'show': movie.isWatched && !movie.dateWatched}">
+      <div class="date-picker" [ngClass]="{'hide': movie.hideDatePicker}">
         <input type="date" value="2021-08-01" id="start" (change)="pickDate($event, movie.id)"
         min="2020-01-01" max="2021-08-31">
       </div>
       <div class="movie-watched-date"
-        [ngClass]="{'show': movie.isWatched && movie.dateWatched}">
+      [ngClass]="{'hide': movie.hideDateWatchedValue}">
         {{movie.dateWatched}}
       </div>
       <button class="see-details-button"

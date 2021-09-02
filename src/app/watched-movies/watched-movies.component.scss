@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
-    margin: 10px 25% 0 25%;
+    width: 80%;
+    margin: 10px 10% 0 10%;
 }
 
 .title {
@@ -11,48 +11,27 @@
     color: rgb(68, 24, 24);
 }
 
-.search-input{
-    width: 60%;
-    height: 50px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    text-align: center;
-    line-height: 1.4em;
-    font-weight: 300;
-    font-size: 24px; 
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: rgba(0, 0, 0, 0.003);
-    color: rgb(68, 24, 24);
-    border: 1px solid rgb(68, 24, 24);
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%), 0 25px 50px 0 rgb(0 0 0 / 15%);
-    outline: none; 
-
-    &::placeholder {
-        color: #d6d3d3;
-        font-style: italic;
-    }
-}
-
-.see-watched-movies-button {
+.back-button {
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     height: 25px;
     color: rgb(68, 24, 24);
     background-color: #e0cdcd;
     border-radius: 25px;
-    width: 27%;
+    width: 18%;
+    margin-top: 20px;
 }
 
 .content-table {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 70%;
     margin-top: 30px;
 }
 
 .results-table-header {
     display: grid;
     width: 100%;
-    grid-template-columns: 34% 33% 33%;
+    grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 45px;
     border: 1px solid rgb(68, 24, 24);;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
@@ -78,7 +57,7 @@
 .results-table-values {
     display: grid;
     width: 100%;
-    grid-template-columns: 34% 33% 33%;
+    grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 45px;
     border: 1px solid rgb(68, 24, 24);;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
@@ -99,11 +78,10 @@
     background-color: #e0cdcd;
     border-radius: 25px;
     margin-top: 10px;
-    margin-right: 20px;
     width: 80%;
 }
 
-.add-to-watched-button {
+.remove-from-watched-button {
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     height: 25px;
     color: rgb(68, 24, 24);
@@ -112,20 +90,6 @@
     margin-top: 10px;
     margin-right: 20px;
     width: 80%;
-
-    &.hide {
-        display: none;
-    }
-}
-
-.date-picker {
-    margin-top: 10px;
-    margin-right: 20px;
-    width: 80%;
-    
-    &.hide {
-        display: none;
-    }
 }
 
 .movie-watched-date {

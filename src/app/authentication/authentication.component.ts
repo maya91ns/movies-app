@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -18,6 +17,7 @@ export class AuthenticationComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
+    localStorage.clear();
   }
 
   authenticate(): void {
@@ -30,10 +30,10 @@ export class AuthenticationComponent implements OnInit {
     localStorage.setItem("requestToken", this.requestToken);
 
     this.buttonClickCounter++;
-    
+        
     if( this.requestToken!= '' || this.buttonClickCounter == 2 )
     {
-      window.location.href = `https://www.themoviedb.org/authenticate/${this.requestToken}?redirect_to=http://localhost:61928/search`;
+      window.location.href = `https://www.themoviedb.org/authenticate/${this.requestToken}?redirect_to=http://localhost:58894/search`;
     }
   }
 }

@@ -1,0 +1,32 @@
+<div class="content-box">
+    <span class="title">
+      {{ title }}
+    </span>
+    <button class="back-button"
+            (click)='onBack()'>
+      Go back to search
+    </button>
+    <div class="content-table">
+      <div class="results-table-header" *ngIf="watchedMovies.length">
+        <div class="movie-name-header">Movie name</div>
+        <div class="movie-date-watched-header">Date watched</div>
+      </div>
+      <div class="results-table-values" *ngFor="let movie of watchedMovies">
+        <div class="movie-name">
+              {{movie.name}}  
+        </div>
+        <div class="movie-watched-date"
+        [ngClass]="{'hide': movie.hideDateWatchedValue}">
+          {{movie.dateWatched}}
+        </div>
+        <button class="see-details-button"
+          [routerLink]="['/movies', movie.id]">
+          See details
+        </button>
+        <button class="remove-from-watched-button"
+          (click)="removeFromWatched(movie.id)">
+          Remove
+        </button>
+      </div>
+  </div>
+  </div>

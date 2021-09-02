@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { SearchMoviesComponent } from './search-movies/search-movies.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
-import { MoviePickDateWatchedModalComponent } from './movie-pick-date-watched-modal/movie-pick-date-watched-modal.component';
+import { WatchedMoviesComponent } from './watched-movies/watched-movies.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { MoviePickDateWatchedModalComponent } from './movie-pick-date-watched-mo
     SearchMoviesComponent,
     AuthenticationComponent,
     MovieDetailComponent,
-    MoviePickDateWatchedModalComponent
+    WatchedMoviesComponent
   ],
   imports: [
     BrowserModule,

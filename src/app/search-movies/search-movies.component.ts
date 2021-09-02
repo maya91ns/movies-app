@@ -15,13 +15,24 @@ export class SearchMoviesComponent implements OnInit {
   listId = '';
   movies: Movie[] = [];
   matchedMovies: Movie[] = [];
+  searchString = '';
+  totalResults = 0;
+  results: any[] = [];
+  success = 0;
+  watchedMovies: Movie[] = [];
 
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    this.createSessionId();
-    this.createMoviesList();
-    this.populateMovies();
+    if(localStorage.getItem(`movies:${localStorage.getItem("apiKey")}`) !== null &&
+    localStorage.getItem(`movies:${localStorage.getItem("apiKey")}`) !== undefined)
+    {
+      this.movies = JSON.parse(localStorage.getItem(`movies:${localStorage.getItem("apiKey")}`) as string);
+    }
+    else
+    {
+      this.createSessionId();
+    }
   }
 
   createSessionId() {
@@ -31,12 +42,13 @@ export class SearchMoviesComponent implements OnInit {
     })
     .subscribe(data => {
         this.sessionId = data.session_id;
+        localStorage.setItem("sessionId", this.sessionId);
+        this.createMoviesList();
     })
-    localStorage.setItem("sessionId", this.sessionId);
   }
 
   createMoviesList() {
-    this.http.post<any>(`https://api.themoviedb.org/3/list?api_key=${localStorage.getItem("apiKey")}`, 
+    this.http.post<any>(`https://api.themoviedb.org/3/list?api_key=${localStorage.getItem("apiKey")}&session_id=${localStorage.getItem("sessionId")}`, 
     {
       "name": "Movies",
       "description": "List of movies",
@@ -44,72 +56,101 @@ export class SearchMoviesComponent implements OnInit {
     })
     .subscribe(data => {
         this.listId = data.list_id;
+        localStorage.setItem("listId", this.listId);
+        this.populateMovies();
     })
-    localStorage.setItem("listId", this.listId);
   }
 
   populateMovies() {
-    for(var i = 1; i <= 3; i++){
-      this.http.post<any>(`https://api.themoviedb.org/3/list/${this.listId}/add_item?api_key=${localStorage.getItem("apiKey")}`, 
+    for (let i = 1; i < 11; i++) {
+      this.http.post<any>(`https://api.themoviedb.org/3/list/${localStorage.getItem("listId")}/add_item?api_key=e51c419bb4879a7be2478ff225c19029&session_id=${localStorage.getItem("sessionId")}`, 
       {
-        "id": i,
-        "media_id": i,
-        "name": `The Lord of the rings ${i}`
-      })
-      this.movies.push({id: i, name: `The Lord of the rings ${i}`, isWatched: false})
-      this.movies.forEach(element => {
-        if(element.isWatched)
+        "media_id": i
+      }).subscribe(data => {
+        this.success = data.status_code; 
+        if(i == 10)
         {
-          element.watched = "YES";
+          this.populateLocalStorage();
         }
-        else
-        {
-          element.watched = "NO";
-        }  
-      });
-      localStorage.setItem("movies", JSON.stringify(this.movies));
+      }) 
     }
   }
 
+  populateLocalStorage() {
+    this.http.get<any>(`https://api.themoviedb.org/4/list/${localStorage.getItem("listId")}?page=1&api_key=${localStorage.getItem("apiKey")}`)
+    .subscribe(data => {
+      this.results = data.results;
+      this.results.forEach(movie => {
+        this.movies.push({id: movie.id, name: movie.title, isWatched: false, 
+        hideDateWatchedValue: true, hideDatePicker: true})
+      })
+      localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
+    })
+  }
+
   searchMovie(event: any){
-    this.movies.forEach(element => {
-      if(element.name?.toLowerCase().includes(event.target.value.toLowerCase()))
-      {
-        if(element.isWatched)
-        {
-          element.watched = "YES";
-        }
-        else
-        {
-          element.watched = "NO";
-        }       
-        this.matchedMovies.push({id: element.id, name: element.name, isWatched: element.isWatched, watched: element.watched});
+    this.matchedMovies = [];
+    this.searchString = event.target.value.toLowerCase();
+    localStorage.setItem("searchString", this.searchString);
+    this.movies.forEach(movie => {
+      if(movie.name?.toLowerCase().includes(this.searchString))
+      {      
+        this.matchedMovies.push({id: movie.id, name: movie.name, isWatched: movie.isWatched, 
+          dateWatched: movie.dateWatched, dateAddedToWatched: movie.dateAddedToWatched,
+          hideDateWatchedValue: movie.hideDateWatchedValue, hideDatePicker: movie.hideDatePicker});
       }
     });
   }
 
-  seeMovieDetails(movieId: number) {
-    this.router.navigate(['/movies', movieId]);
-  }
-
   addToWatched(movieId: number) {
-    // update movies array too
-    this.matchedMovies.forEach(element => {
-      if(element.id == movieId)
+    this.matchedMovies.forEach(movie => {
+      if(movie.id == movieId)
       {
-        element.isWatched = true;
+        movie.isWatched = true;
+        movie.hideDatePicker = false;
       }
     })
-    //localStorage.setItem("movies", JSON.stringify(this.movies));
+    this.movies.forEach(movie => {
+      if(movie.id == movieId)
+      {
+        this.watchedMovies.push(movie);
+        movie.isWatched = true;
+        movie.hideDatePicker = false;
+      }
+    })
+    localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
   }
 
   pickDate(event: any, movieId: number) {
-    // update movies array too
-    this.matchedMovies.forEach(element => {
-      if(element.id == movieId)
+    this.matchedMovies.forEach(movie => {
+      if(movie.id == movieId)
       {
-        element.dateWatched = event.target.value;
+        movie.dateWatched = new Date(event.target.value).toDateString();
+        movie.hideDateWatchedValue = false;
+        movie.hideDatePicker = true;
+
       }
     })
+    this.movies.forEach(movie => {
+      if(movie.id == movieId)
+      {
+        movie.dateWatched = new Date(event.target.value).toDateString();
+        movie.dateAddedToWatched = new Date(Date.now()).toDateString();
+        movie.hideDateWatchedValue = false;
+        movie.hideDatePicker = true;
+      }
+    })
+    this.watchedMovies.forEach(movie => {
+      if(movie.id == movieId)
+      {
+        movie.dateWatched = new Date(event.target.value).toDateString();
+      }
+    })
+    localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
+    localStorage.setItem(`watchedMovies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.watchedMovies));
+  }
+
+  seeWatchedMovies() {
+    this.router.navigate(['/watched']);
   }
 }
