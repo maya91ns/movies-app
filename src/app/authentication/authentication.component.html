@@ -7,8 +7,9 @@
       type="text" 
       placeholder = {{placeholderText}}
       id='appKeyInputId'/>
-    <button class="auth-button"
-    (click)='authenticate()'>Authenticate
-    </button>
+    <app-custom-button
+      [label]="'Authenticate'"
+      (onClick)="authenticate()">
+    </app-custom-button>
   </div>
 </div>

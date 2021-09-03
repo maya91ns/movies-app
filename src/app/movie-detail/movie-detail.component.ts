@@ -81,11 +81,8 @@ export class MovieDetailComponent implements OnInit {
       this.movie.dateWatched = new Date(event.target.value).toDateString();
       this.movie.dateAddedToWatched = new Date(Date.now()).toDateString();
       this.showEditButton = true;
-      //this.movie.hideDateWatchedValue = false;
-
       this.editDateWatchedInMovies();
     }
-    
   }
 
   editDateWatchedInMovies() {
@@ -99,10 +96,12 @@ export class MovieDetailComponent implements OnInit {
         }
         movie.dateWatched = this.movie.dateWatched;
         movie.dateAddedToWatched = this.movie.dateAddedToWatched;
+        movie.hideDateWatchedValue = false;
       }
     })
     if(!isAlreadyWatched)
     {
+      this.movie.hideDateWatchedValue = false;
       this.watchedMovies.push(this.movie);
     }
     localStorage.setItem(`watchedMovies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.watchedMovies));
@@ -112,6 +111,8 @@ export class MovieDetailComponent implements OnInit {
         movie.isWatched = true;
         movie.dateWatched = this.movie.dateWatched;
         movie.dateAddedToWatched = this.movie.dateAddedToWatched;
+        movie.hideDateWatchedValue = false;
+        movie.hideDatePicker = true;
       }
     })
     localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));

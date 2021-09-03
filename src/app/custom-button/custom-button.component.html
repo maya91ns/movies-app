@@ -1,0 +1,8 @@
+<button
+    class="button"
+    [ngClass]="{
+        'button-hide': shouldHide
+    }"
+    (click)="btnClick($event)">
+    {{ label }}
+</button>

@@ -19,6 +19,7 @@
     width: 80%;
     height: 50px;
     margin-top: 30px;
+    margin-bottom: 30px;
     text-align: center;
     line-height: 1.4em;
     font-weight: 300;
@@ -45,4 +46,6 @@
     width: auto;
     padding: 0 15px 0 15px;
     margin-top: 30px;
+    border: 1px solid rgb(68, 24, 24);;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
 }

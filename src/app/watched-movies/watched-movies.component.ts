@@ -25,10 +25,34 @@ export class WatchedMoviesComponent implements OnInit {
     }
   }
 
+  onSelectSortOption(event: any) { 
+    var selectedIndex = (<HTMLSelectElement>document.getElementById("selectSortOptionId")).selectedIndex;
+    if(selectedIndex == 0){
+      this.watchedMovies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    }
+    else if(selectedIndex == 1){
+      this.watchedMovies.sort((a, b) => (a.name < b.name) ? 1 : -1);
+    }
+    else if(selectedIndex == 2){
+      this.watchedMovies.sort((a, b) => (new Date(a.dateWatched) > new Date(b.dateWatched)) ? 1: -1);
+    }
+    else if(selectedIndex == 3){
+      this.watchedMovies.sort((a, b) => (new Date(a.dateWatched) < new Date(b.dateWatched)) ? 1 : -1);
+    }
+    else if(selectedIndex == 4){
+      this.watchedMovies.sort((a, b) => (new Date(a.dateAddedToWatched) > new Date(b.dateAddedToWatched)) ? 1 : -1);
+    }
+    else if(selectedIndex == 5){
+      this.watchedMovies.sort((a, b) => (new Date(a.dateAddedToWatched) < new Date(b.dateAddedToWatched)) ? 1 : -1);
+    }
+  }
+
   removeFromWatched(movieId: number) {
     this.movies.forEach(movie => {
       if(movie.id == movieId)
       {
+        movie.dateWatched = null;
+        movie.dateAddedToWatched = null;
         movie.isWatched = false;
         movie.hideDateWatchedValue = true;
         movie.hideDatePicker = true;
@@ -50,6 +74,10 @@ export class WatchedMoviesComponent implements OnInit {
       counter++;
     });
     this.watchedMovies.splice(index, 1);
+  }
+
+  seeDetails(movieId: number) {
+    this.router.navigate([`/movies/${ movieId}`]);
   }
 
   onBack(): void {

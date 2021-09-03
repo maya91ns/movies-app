@@ -40,11 +40,15 @@ export class SearchMoviesComponent implements OnInit {
         if(movie.name?.toLowerCase().includes(this.searchString))
         {      
           this.matchedMovies.push({id: movie.id, name: movie.name, 
-            shortName: movie.name.length > 40 ? movie.name?.substring(0, 40) + "..." : movie.name, 
+            shortName: movie.name.length > 30 ? movie.name?.substring(0, 30) + "..." : movie.name, 
             isWatched: movie.isWatched, dateWatched: movie.dateWatched, dateAddedToWatched: movie.dateAddedToWatched,
             hideDateWatchedValue: movie.hideDateWatchedValue, hideDatePicker: movie.hideDatePicker});
         }
       });
+    }
+    if(localStorage.getItem(`watchedMovies:${localStorage.getItem("apiKey")}`) !== null) 
+    {
+      this.watchedMovies = JSON.parse(localStorage.getItem(`watchedMovies:${localStorage.getItem("apiKey")}`));
     }
   }
 
@@ -95,9 +99,10 @@ export class SearchMoviesComponent implements OnInit {
       this.results = data.results;
       this.results.forEach(movie => {
         this.movies.push({id: movie.id, name: movie.title, 
-          shortName: movie.title.length > 40 ? movie.title?.substring(0, 40) + "..." : movie.title, 
+          shortName: movie.title.length > 30 ? movie.title?.substring(0, 30) + "..." : movie.title, 
           isWatched: false, hideDateWatchedValue: true, hideDatePicker: true})
       })
+      this.movies.sort((a, b) => (a.name > b.name) ? 1 : -1);
       localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
     })
   }
@@ -110,7 +115,7 @@ export class SearchMoviesComponent implements OnInit {
       if(movie.name?.toLowerCase().includes(this.searchString))
       {      
         this.matchedMovies.push({id: movie.id, name: movie.name, 
-          shortName: movie.name.length > 40 ? movie.name?.substring(0, 40) + "..." : movie.name, 
+          shortName: movie.name.length > 30 ? movie.name?.substring(0, 30) + "..." : movie.name, 
           isWatched: movie.isWatched, dateWatched: movie.dateWatched, dateAddedToWatched: movie.dateAddedToWatched,
           hideDateWatchedValue: movie.hideDateWatchedValue, hideDatePicker: movie.hideDatePicker});
       }
@@ -132,8 +137,6 @@ export class SearchMoviesComponent implements OnInit {
         movie.hideDatePicker = false;
       }
     })
-    // u funkciji ispod upisujemo, pa ovde ne treba
-    //localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
   }
 
   pickDate(event: any, movieId: number) {
@@ -155,12 +158,16 @@ export class SearchMoviesComponent implements OnInit {
         this.watchedMovies.push(movie);
       }
     })
-    // todomaja - zasto ovaj upis ne radi?
     localStorage.setItem(`movies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.movies));
+    this.watchedMovies.sort((a, b) => (a.name > b.name) ? 1 : -1);
     localStorage.setItem(`watchedMovies:${localStorage.getItem("apiKey")}`, JSON.stringify(this.watchedMovies));
   }
 
   seeWatchedMovies() {
     this.router.navigate(['/watched']);
+  }
+
+  seeDetails(movieId: number) {
+    this.router.navigate([`/movies/${ movieId}`]);
   }
 }

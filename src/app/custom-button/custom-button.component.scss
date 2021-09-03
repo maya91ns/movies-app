@@ -1,0 +1,16 @@
+.button {
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 25px;
+    color: rgb(68, 24, 24);
+    background-color: #e0cdcd;
+    border-radius: 25px;
+    width: auto;
+    padding: 0 15px 0 15px;
+    border: 1px solid rgb(68, 24, 24);;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
+    position: relative;
+
+    &-hide {
+        display: none;
+    }
+}

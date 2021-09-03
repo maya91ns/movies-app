@@ -2,31 +2,46 @@
     <span class="title">
       {{ title }}
     </span>
-    <button class="back-button"
-            (click)='onBack()'>
-      Go back to search
-    </button>
+    <div class="above-table-box">
+      <app-custom-button
+            [label]="'Go back to search'"
+            (onClick)="onBack()">
+          </app-custom-button>
+      <select class="sort-by-select" 
+        id="selectSortOptionId"
+        (change)="onSelectSortOption($event)">
+        <option>Name asc</option>
+        <option>Name desc</option>
+        <option>Date watched asc</option>
+        <option>Date watched desc</option>
+        <option>Date added asc</option>
+        <option>Date added desc</option>
+      </select>
+    </div>
     <div class="content-table">
       <div class="results-table-header" *ngIf="watchedMovies.length">
         <div class="movie-name-header">Movie name</div>
-        <div class="movie-date-watched-header">Date watched</div>
+        <div class="movie-date-watched-header">Watched</div>
+        <div class="movie-date-watched-header">Added</div>
       </div>
       <div class="results-table-values" *ngFor="let movie of watchedMovies">
         <div class="movie-name">
               {{movie.shortName}}  
         </div>
-        <div class="movie-watched-date"
-        [ngClass]="{'hide': movie.hideDateWatchedValue}">
+        <div class="movie-watched-date">
           {{movie.dateWatched}}
         </div>
-        <button class="see-details-button"
-          [routerLink]="['/movies', movie.id]">
-          See details
-        </button>
-        <button class="remove-from-watched-button"
-          (click)="removeFromWatched(movie.id)">
-          Remove
-        </button>
+        <div class="movie-added-to-watched-date">
+          {{movie.dateAddedToWatched}}
+        </div>
+        <app-custom-button
+            [label]="'See details'"
+            (onClick)="seeDetails(movie.id)">
+          </app-custom-button>
+        <app-custom-button
+            [label]="'Remove'"
+            (onClick)="removeFromWatched(movie.id)">
+          </app-custom-button>
       </div>
   </div>
   </div>

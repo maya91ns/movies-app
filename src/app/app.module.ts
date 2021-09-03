@@ -7,6 +7,7 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { SearchMoviesComponent } from './search-movies/search-movies.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { WatchedMoviesComponent } from './watched-movies/watched-movies.component';
+import { CustomButtonComponent } from './custom-button/custom-button.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { WatchedMoviesComponent } from './watched-movies/watched-movies.componen
     SearchMoviesComponent,
     AuthenticationComponent,
     MovieDetailComponent,
-    WatchedMoviesComponent
+    WatchedMoviesComponent,
+    CustomButtonComponent
   ],
   imports: [
     BrowserModule,

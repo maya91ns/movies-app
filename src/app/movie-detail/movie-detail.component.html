@@ -11,22 +11,22 @@
         <div class="movie-detail-data">{{movie.name}}</div>
       </div>
       <div class="movie-detail-field-box">
-        <div class="movie-detail-field">Date watched:</div>
+        <div class="movie-detail-field">Watched:</div>
         <div class="date-watched-box">
           <div class="movie-detail-data" [ngClass]="{'hide': !movie.isWatched}">{{movie.dateWatched}}</div>
-          <button class="edit-date-watched-button"  
-            [ngClass]="{'hide': !showEditButton}"
-            (click)='editDateWatched()'>
-            Edit date watched
-          </button>
-          <div class="date-picker" [ngClass]="{'hide': showEditButton}">
+          <app-custom-button
+            [label]="'Edit date watched'"
+            [shouldHide]="!showEditButton"
+            (onClick)="editDateWatched()">
+          </app-custom-button>
+          <div class="date-picker" [ngClass]="{'hide': showEditButton, 'remove-margin-left': movie.dateWatched}">
             <input type="date" value="2021-08-01" id="start" (change)="pickDate($event)"
             min="2020-01-01" max="2021-08-31">
           </div>
         </div>
       </div>
-      <div class="date-added-to-watched-box" [ngClass]="{'hide': !movie.isWatched}">
-        <div class="movie-detail-field">Date added to watched:</div>
+      <div class="date-added-to-watched-box" [ngClass]="{'hide': movie.hideDateWatchedValue}">
+        <div class="movie-detail-field">Added to watched:</div>
         <div class="movie-detail-data">{{movie.dateAddedToWatched}}</div>
       </div>
       <div class="movie-detail-field-box">
@@ -45,17 +45,15 @@
         <div class="movie-detail-field">Genres:</div>
         <div class="movie-detail-data">{{movie.genres}}</div>
       </div>
-      <div class="movie-detail-field-box">
+      <div class="movie-detail-overview-box">
         <div class="movie-detail-field">Overview:</div>
         <div class="movie-overview">{{movie.overview}}</div>
       </div>
-
-
     </div>
     <div class='movie-detail-footer'>
-      <button class="back-button"
-              (click)='onBack()'>
-        Go back to search
-      </button>
+      <app-custom-button
+        [label]="'Go back to search'"
+        (onClick)="onBack()">
+      </app-custom-button>
     </div>
   </div>
