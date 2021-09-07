@@ -23,6 +23,13 @@
             <input type="date" value="2021-08-01" id="start" (change)="pickDate($event)"
             min="2020-01-01" max="2021-08-31">
           </div>
+
+          <!-- <mat-form-field> -->
+            <!-- <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker> -->
+          <!-- </mat-form-field> -->
+
         </div>
       </div>
       <div class="date-added-to-watched-box" [ngClass]="{'hide': movie.hideDateWatchedValue}">

@@ -1,3 +1,15 @@
+.header-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    margin-top: 60px;
+    font-size: 100px;
+    color: rgb(68, 24, 24);
+}
+
 .content-box {
     display: flex;
     flex-direction: column;
@@ -6,17 +18,12 @@
     margin: 10px 10% 0 10%;
 }
 
-.title {
-    font-size: 100px;
-    color: rgb(68, 24, 24);
-}
-
 .above-table-box {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    margin-top: 20px;
+    margin-top: 50px;
     margin-left: 84%;
 }
 
@@ -30,6 +37,10 @@
     border: 1px solid rgb(68, 24, 24);;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 5%), 0 25px 50px 0 rgb(0 0 0 / 5%);
     margin-left: 18%;
+
+    &.hide {
+        display: none;
+    }
 }
 
 .content-table {

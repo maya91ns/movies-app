@@ -170,4 +170,9 @@ export class SearchMoviesComponent implements OnInit {
   seeDetails(movieId: number) {
     this.router.navigate([`/movies/${ movieId}`]);
   }
+
+  signOut() {
+    localStorage.clear();
+    this.router.navigate(['/authenticate']);
+  }
 }

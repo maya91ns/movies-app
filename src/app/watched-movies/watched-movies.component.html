@@ -1,7 +1,10 @@
+<div class="header-box">
+  <span class="title">
+    {{ title }}
+  </span>
+</div>
 <div class="content-box">
-    <span class="title">
-      {{ title }}
-    </span>
+    
     <div class="above-table-box">
       <app-custom-button
             [label]="'Go back to search'"
@@ -9,6 +12,7 @@
           </app-custom-button>
       <select class="sort-by-select" 
         id="selectSortOptionId"
+        [ngClass]="{'hide': watchedMovies === null || watchedMovies.length == 0}"
         (change)="onSelectSortOption($event)">
         <option>Name asc</option>
         <option>Name desc</option>
