@@ -17,7 +17,6 @@ export class AuthenticationComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    //localStorage.clear();
   }
 
   authenticate(): void {

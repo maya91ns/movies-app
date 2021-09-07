@@ -14,14 +14,13 @@ const routes: Routes = [
     },
     { 
       path: 'authenticate', 
-      // canActivate: [RouteGuardsGuard],
       component: AuthenticationComponent 
     },
-    // { 
-    //   path: '', 
-    //   redirectTo: 'authenticate', 
-    //   pathMatch: 'full' 
-    // },
+    { 
+      path: '', 
+      redirectTo: 'authenticate', 
+      pathMatch: 'full' 
+    },
     { 
       path: 'movies/:id', 
       canActivate: [RouteGuardsGuard],
